@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:ns2="http://northgate-is.com/gem/generic-common/1.0/201201/common.xsd" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:s0="http://northgate-is.com/gem/generic/humanResources/1.0/201203/humanResources.xsd" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" targetNamespace="http://northgate-is.com/gem/generic/humanResources/1.0/201203/humanResources.xsd">
+    <types>
+        <s:schema attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://northgate-is.com/gem/generic/humanResources/1.0/201203/humanResources.xsd">
+            <s:import namespace="http://northgate-is.com/gem/generic-common/1.0/201201/common.xsd"/>
+            <s:element name="savePersonnel">
+                <s:complexType>
+                    <s:sequence>
+                        <s:element minOccurs="0" name="personnelRecords" type="s0:ArrayOfpersonnelRecordPersonnelRecord"/>
+                        <s:element minOccurs="0" name="extension" type="ns2:Extension"/>
+                    </s:sequence>
+                </s:complexType>
+            </s:element>
+            <s:complexType name="ArrayOfpersonnelRecordPersonnelRecord">
+                <s:sequence>
+                    <s:element maxOccurs="unbounded" minOccurs="0" name="personnelRecord" nillable="true" type="s0:PersonnelRecord"/>
+                </s:sequence>
+            </s:complexType>
+            <s:complexType name="PersonnelRecord">
+                <s:sequence>
+                    <s:element name="recordStatus" type="s0:RecordOperationEnum"/>
+                    <s:element name="forceID" type="ns2:ConstrainedValue"/>
+                    <s:element name="personnelID" type="s:string"/>
+                    <s:element name="uniqueNationalIdentifier" type="s0:UniqueNationalIdentifier"/>
+                    <s:element minOccurs="0" name="collarNumber" type="s:string"/>
+                    <s:element minOccurs="0" name="pncUserID" type="s:string"/>
+                    <s:element name="title" type="ns2:ConstrainedValue"/>
+                    <s:element name="surname" type="s:string"/>
+                    <s:element name="forename1" type="s:string"/>
+                    <s:element minOccurs="0" name="forename2" type="s:string"/>
+                    <s:element minOccurs="0" name="forename3" type="s:string"/>
+                    <s:element minOccurs="0" name="gender" type="ns2:ConstrainedValue"/>
+                    <s:element minOccurs="0" name="supervisor" type="s0:supervisor"/>
+                    <s:element minOccurs="0" name="stationName" type="s:string"/>
+                    <s:element minOccurs="0" name="stationCode">
+                        <s:simpleType>
+                            <s:restriction base="s:string">
+                                <s:maxLength value="4"/>
+                            </s:restriction>
+                        </s:simpleType>
+                    </s:element>
+                    <s:element minOccurs="0" name="emailAddress" type="ns2:EmailAddress"/>
+                    <s:element name="employmentHistory" type="s0:ArrayOfemploymentEmploymentRecord"/>
+                    <s:element name="defaultUnit" type="ns2:ConstrainedValue"/>
+                    <s:element minOccurs="0" name="defaultSubmitUnit" type="ns2:ConstrainedValue"/>
+                    <s:element name="currentUnits" type="s0:ArrayOfcurrentUnitUnitRole"/>
+                    <s:element minOccurs="0" name="extension" type="ns2:Extension"/>
+                </s:sequence>
+            </s:complexType>
+            <s:simpleType name="RecordOperationEnum">
+                <s:restriction base="s:string">
+                    <s:enumeration value="New"/>
+                    <s:enumeration value="Amend"/>
+                    <s:enumeration value="Archive"/>
+                </s:restriction>
+            </s:simpleType>
+            <s:simpleType name="UniqueNationalIdentifier">
+                <s:restriction base="s:string"/>
+            </s:simpleType>
+            <s:complexType name="supervisor">
+                <s:sequence>
+                    <s:element name="fullName" type="s:string"/>
+                    <s:element name="forceID" type="ns2:ConstrainedValue"/>
+                    <s:element name="personnelID" type="s:string"/>
+                    <s:element minOccurs="0" name="uniqueNationalIdentifier" type="s0:UniqueNationalIdentifier"/>
+                    <s:element minOccurs="0" name="extension" type="ns2:Extension"/>
+                </s:sequence>
+            </s:complexType>
+            <s:complexType name="ArrayOfemploymentEmploymentRecord">
+                <s:sequence>
+                    <s:element maxOccurs="unbounded" minOccurs="0" name="employment" nillable="true" type="s0:EmploymentRecord"/>
+                </s:sequence>
+            </s:complexType>
+            <s:complexType name="EmploymentRecord">
+                <s:sequence>
+                    <s:element name="from" type="s:date"/>
+                    <s:element minOccurs="0" name="to" type="s:date"/>
+                    <s:element name="rank" type="ns2:ConstrainedValue"/>
+                    <s:element minOccurs="0" name="extension" type="ns2:Extension"/>
+                </s:sequence>
+            </s:complexType>
+            <s:complexType name="ArrayOfcurrentUnitUnitRole">
+                <s:sequence>
+                    <s:element maxOccurs="unbounded" minOccurs="0" name="currentUnit" nillable="true" type="s0:UnitRole"/>
+                </s:sequence>
+            </s:complexType>
+            <s:complexType name="UnitRole">
+                <s:sequence>
+                    <s:element name="unit" type="ns2:ConstrainedValue"/>
+                    <s:element name="role" type="ns2:ConstrainedValue"/>
+                </s:sequence>
+            </s:complexType>
+            <s:element name="savePersonnelResponse">
+                <s:complexType>
+                    <s:sequence>
+                        <s:element name="savePersonnelResult" type="s0:SavePersonnelResponseStatusEnum"/>
+                        <s:element minOccurs="0" name="extension" type="ns2:Extension"/>
+                        <s:element minOccurs="0" name="saveStatusList" type="s0:ArrayOfsaveStatusSaveStatus"/>
+                    </s:sequence>
+                </s:complexType>
+            </s:element>
+            <s:simpleType name="SavePersonnelResponseStatusEnum">
+                <s:restriction base="s:string">
+                    <s:enumeration value="OK"/>
+                    <s:enumeration value="Warning-SomeInvalidRecords"/>
+                </s:restriction>
+            </s:simpleType>
+            <s:complexType name="ArrayOfsaveStatusSaveStatus">
+                <s:sequence>
+                    <s:element maxOccurs="unbounded" minOccurs="0" name="saveStatus" nillable="true" type="s0:SaveStatus"/>
+                </s:sequence>
+            </s:complexType>
+            <s:complexType name="SaveStatus">
+                <s:sequence>
+                    <s:element name="status" type="s0:SaveOperationEnum"/>
+                    <s:element minOccurs="0" name="errorReason" type="s:string"/>
+                    <s:element name="forceID" type="ns2:ConstrainedValue"/>
+                    <s:element name="personnelID" type="s:string"/>
+                    <s:element minOccurs="0" name="uniqueNationalIdentifier" type="s0:UniqueNationalIdentifier"/>
+                </s:sequence>
+            </s:complexType>
+            <s:simpleType name="SaveOperationEnum">
+                <s:restriction base="s:string">
+                    <s:enumeration value="OK-RecordCreated"/>
+                    <s:enumeration value="OK-RecordUpdated"/>
+                    <s:enumeration value="OK-RecordArchived"/>
+                    <s:enumeration value="Error-Duplicate"/>
+                    <s:enumeration value="Error-InvalidData"/>
+                    <s:enumeration value="Error-InvalidPersonnelID"/>
+                    <s:enumeration value="Error-InvalidForceCode"/>
+                </s:restriction>
+            </s:simpleType>
+        </s:schema>
+        <s:schema elementFormDefault="qualified" targetNamespace="http://northgate-is.com/gem/generic-common/1.0/201201/common.xsd">
+            <s:complexType name="ConstrainedValue">
+                <s:sequence>
+                    <s:element name="cvCode" type="s:string"/>
+                    <s:element minOccurs="0" name="description" type="s:string"/>
+                    <s:element minOccurs="0" name="extension" type="ns2:Extension"/>
+                </s:sequence>
+            </s:complexType>
+            <s:complexType name="Extension">
+                <s:sequence>
+                    <s:any minOccurs="0"/>
+                </s:sequence>
+            </s:complexType>
+            <s:simpleType name="EmailAddress">
+                <s:restriction base="s:string"/>
+            </s:simpleType>
+        </s:schema>
+    </types>
+    <message name="savePersonnelSoapIn">
+        <part name="parameters" element="s0:savePersonnel"/>
+    </message>
+    <message name="savePersonnelSoapOut">
+        <part name="parameters" element="s0:savePersonnelResponse"/>
+    </message>
+    <portType name="HumanResourcesInboundServiceSoap">
+        <operation name="savePersonnel">
+            <input message="s0:savePersonnelSoapIn"/>
+            <output message="s0:savePersonnelSoapOut"/>
+        </operation>
+    </portType>
+    <binding name="HumanResourcesInboundServiceSoap" type="s0:HumanResourcesInboundServiceSoap">
+        <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+        <operation name="savePersonnel">
+            <soap:operation soapAction="http://northgate-is.com/gem/generic/humanResources/1.0/201203/savePersonnel" style="document"/>
+            <input>
+                <soap:body use="literal"/>
+            </input>
+            <output>
+                <soap:body use="literal"/>
+            </output>
+        </operation>
+    </binding>
+    <service name="HumanResourcesInboundService">
+        <port name="HumanResourcesInboundServiceSoap" binding="s0:HumanResourcesInboundServiceSoap">
+            <soap:address location="https://connect.jcf.gov.jm:1443/hr/interfaces/SOAPS.Interfaces.HR.Service.fromHR.cls"/>
+        </port>
+    </service>
+</definitions>
